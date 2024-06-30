@@ -1,5 +1,6 @@
 package com.nmp.uts_anmp.view
 
+import com.nmp.uts_anmp.model.User
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -32,20 +33,23 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        regisViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         bind.btnRegister.setOnClickListener {
-            regisViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-            val fname = bind.txtFname.text.toString()
-            val lname = bind.txtLname.text.toString()
-            val username = bind.txtUsername.text.toString()
-            val email = bind.txtEmail.text.toString()
-            val pass = bind.txtPass.text.toString()
+            var user = User(
+                bind.txtFname.text.toString(),
+                bind.txtLname.text.toString(),
+                bind.txtUsername.text.toString(),
+                bind.txtPass.text.toString(),
+                bind.txtEmail.text.toString(),
+            )
             val Cpass = bind.txtCpass.text.toString()
-            if (fname.isNotEmpty() && lname.isNotEmpty() && username.isNotEmpty() && email.isNotEmpty() && pass.isNotEmpty()&& Cpass.isNotEmpty()) {
-                if (pass == Cpass) {
-                    regisViewModel.addUser(username,fname, lname, email, pass)
-                    val action = RegisterFragmentDirections.actionloginFragment()
-                    Navigation.findNavController(it).navigate(action)
+            val list = listOf(user)
+            if (user.fname!!.isNotEmpty() && user.lname!!.isNotEmpty() && user.username!!.isNotEmpty() && user.email!!.isNotEmpty() && user.password!!.isNotEmpty() && Cpass.isNotEmpty()) {
+                if (user.password == Cpass) {
+                    regisViewModel.addUser(list)
+                    Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
+                    Navigation.findNavController(it).popBackStack()
+
                 } else {
                     Toast.makeText(context, "Pasword Is Different!", Toast.LENGTH_SHORT).show()
                 }

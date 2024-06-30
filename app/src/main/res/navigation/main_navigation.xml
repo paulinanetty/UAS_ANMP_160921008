@@ -13,6 +13,12 @@
         <action
             android:id="@+id/actiondetailFragment2"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/actioncreatenews"
+            app:destination="@id/createNewsFragment" />
+        <action
+            android:id="@+id/actionUpdate"
+            app:destination="@id/updateFragment2" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -31,9 +37,9 @@
         <action
             android:id="@+id/actiontologinFragment"
             app:destination="@id/loginFragment" />
-        <argument
-            android:name="username"
-            app:argType="string" />
+        <action
+            android:id="@+id/actiontohome"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -59,6 +65,23 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/actionhomeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNewsFragment"
+        android:name="com.nmp.uts_anmp.view.CreateNewsFragment"
+        android:label="fragment_create_news"
+        tools:layout="@layout/fragment_create_news" />
+    <fragment
+        android:id="@+id/updateFragment2"
+        android:name="com.nmp.uts_anmp.view.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/actiontohome"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

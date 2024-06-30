@@ -11,6 +11,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        dataBinding = true
     }
     defaultConfig {
         applicationId = "com.nmp.uts_anmp"
@@ -57,5 +58,10 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.google.android.material:material:1.11.0-alpha03")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.room:room-runtime:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
+    kapt("androidx.room:room-compiler:2.5.1")
 
 }

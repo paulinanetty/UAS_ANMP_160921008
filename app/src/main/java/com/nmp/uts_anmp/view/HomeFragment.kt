@@ -7,7 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nmp.uts_anmp.R
 import com.nmp.uts_anmp.databinding.FragmentHomeBinding
 import com.nmp.uts_anmp.viewmodel.HomeViewModel
 
@@ -17,14 +23,16 @@ class HomeFragment : Fragment() {
     private val hobbyListAdapter  = AppListAdapter(arrayListOf())
     private lateinit var bind: FragmentHomeBinding
 
-
+    private lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         bind = FragmentHomeBinding.inflate(inflater,container,false)
         return bind.root
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,7 +42,22 @@ class HomeFragment : Fragment() {
 
         bind.recyclerView.layoutManager = LinearLayoutManager(context)
         bind.recyclerView.adapter = hobbyListAdapter
+//        navController = Navigation.findNavController(requireActivity(), R.id.fragmentHost)
+//        bind..setupWithNavController(navController)
 
+//        view.findViewById<View>(R.id.pro)?.setOnClickListener {
+//            val navController = Navigation.findNavController(requireActivity(), R.id.fragmentHost)
+//            navController.navigate(R.id.profileFragment)
+//        }
+
+        bind.floatingActionButton.setOnClickListener{
+            val action = HomeFragmentDirections.actioncreatenews()
+            Navigation.findNavController(it).navigate(action)
+        }
+//        bind..setOnClickListener{
+//            val action = HomeFragmentDirections.actioncreatenews()
+//            Navigation.findNavController(it).navigate(action)
+//        }
         observeViewModel()
 
         bind.refreshLayout.setOnRefreshListener {
@@ -48,7 +71,13 @@ class HomeFragment : Fragment() {
 
     fun observeViewModel() {
         viewModel.hobbyLD.observe(viewLifecycleOwner, Observer {
-            hobbyListAdapter.updateStudentList(it)
+            hobbyListAdapter.updatehobbyList(it)
+            if(it.isEmpty()) {
+                bind.recyclerView?.visibility = View.GONE
+                bind.txterror.setText("Your News is still empty.")
+            } else {
+                bind.recyclerView?.visibility = View.VISIBLE
+            }
         })
 
 

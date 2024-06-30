@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nmp.uts_anmp.R
 import com.nmp.uts_anmp.databinding.ActivityMainBinding
 
@@ -27,14 +28,14 @@ class MainActivity : AppCompatActivity() {
                 else -> showBottomNavigationBar()
             }
         }
-
+//
+//
 
         bind.bottomNav.setupWithNavController(navController)
 
 //        finish()
 //        startActivity(Intent(this, AuthActivity::class.java))
     }
-
     private fun hideBottomNavigationBar() {
         bind.bottomNav.visibility = View.GONE
     }
@@ -42,4 +43,6 @@ class MainActivity : AppCompatActivity() {
     private fun showBottomNavigationBar() {
         bind.bottomNav.visibility = View.VISIBLE
     }
+
+
 }
